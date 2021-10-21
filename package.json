@@ -5,12 +5,13 @@
   "main": "index.js",
   "dependencies": {},
   "devDependencies": {
-    "cypress": "^8.6.0"
+    "cypress": "^8.6.0",
+    "typescript": "3.4.5"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "cy:run_spec": "npx cypress run --spec 'cypress/integration/*.spec.js' --record --key 5adbca6e-06eb-4f71-a410-fe391f02e416 --parallel",
-    "cy:run_browser": "npm run cy:run_spec -- --browser chrome --ci-build-id 9 & npm run cy:run_spec -- --browser firefox --ci-build-id 9 & npm run cy:run_spec -- --browser edge --ci-build-id 9"
+    "cy:run_spec": "npx cypress run --spec 'cypress/integration/*.spec.js' --record --key 5adbca6e-06eb-4f71-a410-fe391f02e416",
+    "cy:run_browser": "npm run cy:run_spec -- --browser chrome --group Chrome --ci-build-id 11 & npm run cy:run_spec -- --browser firefox --group Firefox --ci-build-id 11"
   },
   "repository": {
     "type": "git",
