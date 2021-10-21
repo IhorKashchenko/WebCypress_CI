@@ -1,0 +1,16 @@
+{
+  "baseUrl": "https://wa19qa40.altec-wa.com/DoclinkWeb/#/login",
+  "ignoreTestFiles": [
+    "**/2-advanced-examples/*",
+    "**/1-getting-started/*",
+    "*/videos/*"
+  ],
+  "viewportHeight": 1080,
+  "viewportWidth": 1920,
+  "defaultCommandTimeout": 10000,
+  "retries": {
+    "runMode": 1,
+    "openMode": 1
+  },
+  "projectId": "18n3zg"
+}

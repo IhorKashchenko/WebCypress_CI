@@ -1,0 +1,25 @@
+{
+  "name": "webcypress_ci",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "cypress": "^8.6.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "cy:run_spec": "npx cypress run --spec 'cypress/integration/*.spec.js' --record --key 5adbca6e-06eb-4f71-a410-fe391f02e416 --parallel",
+    "cy:run_browser": "npm run cy:run_spec -- --browser chrome --ci-build-id 9 & npm run cy:run_spec -- --browser firefox --ci-build-id 9 & npm run cy:run_spec -- --browser edge --ci-build-id 9"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IhorKashchenko/WebCypress_CI.git"
+  },
+  "author": "Ihor",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/IhorKashchenko/WebCypress_CI/issues"
+  },
+  "homepage": "https://github.com/IhorKashchenko/WebCypress_CI#readme"
+}
