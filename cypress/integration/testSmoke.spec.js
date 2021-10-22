@@ -9,7 +9,7 @@ import { onBatchIndexPage } from "../support/page_objects/batchIndex"
 
 describe('Login Pege Layout', () => {
 
-    it('Login Pege Layout', () => {
+    it.only('Login Pege Layout', () => {
         cy.openLoginPage()
         cy.get('[id="profileButton"]').should('contain.text', 'use a saved profile').and('be.enabled')
         cy.contains('Enter your credentials:').should('contain.text', 'Enter your credentials:')
