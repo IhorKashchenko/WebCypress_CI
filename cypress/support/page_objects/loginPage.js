@@ -30,8 +30,14 @@ export class LoginPage{
     }
 
     logout(){
-        cy.menuBtnClick()
+        cy.menuBtnClick().wait(300)
         cy.get('.mat-menu-content').contains('button', 'Log Out').click({force: true})
+        cy.get('form mat-form-field').should('contain', 'Login')
+    }
+
+    logout_mobile(){
+        cy.get('.mat-menu-trigger').eq(2).click({force:true}).wait(500)
+        cy.contains('button', 'Log Out').click({force: true})
         cy.get('form mat-form-field').should('contain', 'Login')
     }
 

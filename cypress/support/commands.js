@@ -112,7 +112,7 @@ Cypress.Commands.add('burnWarningYesButtonClick', () => {
 })
 
 Cypress.Commands.add('burnAssertion', () => {
-    cy.get('.toast-container').should('contain', 'Burned') 
+    cy.get('.toast-container').should('contain', 'Burned')
 })
 
 Cypress.Commands.add('companyDropdownClick', (company) => {
@@ -270,7 +270,7 @@ Cypress.Commands.add('openFirstDocument', () => {
 
 //Random
 Cypress.Commands.add('menuBtnClick', () => {
-    cy.get('mat-toolbar-row ul').eq(2).click()
+    cy.get('[class="flex-row float-right align-top"]').click()
 })
 
 Cypress.Commands.add('MySettingsBtnClick', () => {

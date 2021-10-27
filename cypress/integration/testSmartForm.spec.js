@@ -15,7 +15,7 @@ describe('Test with Page Objects', () => {
     //     onLoginPage.logout()
     // })
 
-    it.only('creatingAccumatica', () => {
+    it('creatingAccumatica', () => {
 
         navigateTo.batchIndexPage()
         onBatchIndexPage.openTiffFolder()
