@@ -49,7 +49,7 @@ Cypress.Commands.add('openLoginPage', () => {
 })
 
 Cypress.Commands.add('openCloudLoginPage', () => {
-    cy.visit('https://east-test.altec-cloud.com/DocLinkWeb/#/login')
+    cy.visit('https://test.altec-cloud.com/DocLinkWeb/#/login')
 })
 
 // Assertion
@@ -262,7 +262,7 @@ Cypress.Commands.add('navigateToSearchByID', () => {
 })
 // RESULTS Grid
 Cypress.Commands.add('openFirstDocument', () => {
-    cy.get('tbody tr').find('td').first().click()
+    cy.get('tbody tr', {timeout:20000}).find('td').first().click()
     cy.wait(500)
     cy.get('.toolbar').find('[id="resultstoolbar_open"]').click()
     cy.wait(4000)

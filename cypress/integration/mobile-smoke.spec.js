@@ -1,29 +1,31 @@
 /// <reference types="cypress" />
 import { onLoginPage }  from "../support/page_objects/loginPage"
-import { navigateTo } from "../support/page_objects/navigationPage"
-import { onSFcreationPage } from "../support/page_objects/smartFormsPageCreation"
-import { onBatchIndexPage } from "../support/page_objects/batchIndex"
 
-
-const sizes = ['iphone-x', 'samsung-note9', 'iphone-6']
+const devices = ['iphone-x', 'samsung-note9', 'iphone-6']
 const urls = ['https://wa19qa40.altec-wa.com/DoclinkWeb/#/login',
               'https://test.altec-cloud.com/DocLinkWeb/#/login']
+const ipads = 'ipad-mini'
 
 describe('SMOKE mobile', () => {
       
-  sizes.forEach(size => {
+  devices.forEach(device => {
 
     describe('phones', () => {
 
       urls.forEach(url => {
-        it('check menu items', () => {
-          cy.viewport(size)
+
+        const loginOpt = (() => {
           cy.visit(url)
           if(url == urls[1]){
-            onLoginPage.loginCloud('ik', '1234')
+          onLoginPage.loginCloud('ik2', '1234')
           } else {
-            onLoginPage.login('ik', '1234')
+          onLoginPage.login('IhorKweb4.0', '1234')
           }
+        })
+
+        it('check menu items '+ device + ' ' + url, () => {
+          cy.viewport(device)
+          loginOpt()
           cy.contains('Quick Search').find('.fa-caret-down').click()
           cy.get('.mat-menu-content').should('contain', 'Quick Search')
             .and('contain', 'Advanced Search')
@@ -45,14 +47,9 @@ describe('SMOKE mobile', () => {
           onLoginPage.logout_mobile()
         })
     
-        it('navigate cross different pages', () => {
-          cy.viewport(size)
-          cy.visit(url)
-          if(url == urls[1]){
-            onLoginPage.loginCloud('ik', '1234')
-          } else {
-            onLoginPage.login('ik', '1234')
-          }
+        it('navigate cross different pages '+ device + ' ' + url, () => {
+          cy.viewport(device)
+          loginOpt()
           cy.contains('Quick Search').find('.fa-caret-down').click()
           cy.get('.mat-menu-content').contains('Advanced Search').click().wait(500)
           cy.get('.nav-item').should('contain', 'Advanced Search')
@@ -84,6 +81,21 @@ describe('SMOKE mobile', () => {
             .should('contain', 'CRITERIA')
             .and('contain', 'RESULTS')
             .and('contain', 'VIEW')
+          cy.get('[id="workflow-supervisor-criteria-detail"]')
+            .should('contain', 'Workflow')
+            .and('contain', 'Status')
+            .and('contain', 'Category')
+            .and('contain', 'Property Filter')
+            .and('contain', 'Property Value')
+            .and('contain', 'Search')
+          cy.contains('change category').should('be.visible')
+          cy.contains('change status').should('be.visible')
+          cy.get('button').contains('Save Category')
+            .should('be.visible')
+            .and('not.be.enabled')
+          cy.get('button').contains('Save Status')
+            .should('be.visible')
+            .and('not.be.enabled')
           cy.contains('Supervisor').find('.fa-caret-down').click()
           cy.get('.mat-menu-content').contains('Delegate').click().wait(500)
           cy.get('.nav-item').should('contain', 'Delegate')
@@ -111,19 +123,22 @@ describe('SMOKE mobile', () => {
     })   
   })
   
-  const ipads = 'ipad-mini'
-
   describe('SMOKE ipad-mini', () => {
 
     urls.forEach(url => {
-      it('check menu items', () => {
-        cy.viewport(ipads)
+
+      const loginOpt = (() => {
         cy.visit(url)
         if(url == urls[1]){
-          onLoginPage.loginCloud('ik', '1234')
+        onLoginPage.loginCloud('ik2', '1234')
         } else {
-          onLoginPage.login('ik', '1234')
-         }
+        onLoginPage.login('IhorKweb4.0', '1234')
+        }
+      })
+      
+      it('check menu items  ' + ipads +' '+ url, () => {
+        cy.viewport(ipads)
+        loginOpt()
         cy.contains('Quick Search').find('.fa-caret-down').click()
         cy.get('.mat-menu-content').should('contain', 'Quick Search')
           .and('contain', 'Advanced Search')
@@ -145,14 +160,9 @@ describe('SMOKE mobile', () => {
         onLoginPage.logout_mobile()
       })
   
-      it('navigate cross different pages', () => {
+      it('navigate cross different pages ' + ipads +' '+ url, () => {
         cy.viewport(ipads)
-        cy.visit(url)
-        if(url == urls[1]){
-          onLoginPage.loginCloud('ik', '1234')
-        } else {
-          onLoginPage.login('ik', '1234')
-        }
+        loginOpt()
         cy.contains('Quick Search').find('.fa-caret-down').click()
         cy.get('.mat-menu-content').contains('Advanced Search').click().wait(500)
         cy.get('.nav-item').should('contain', 'Advanced Search')
@@ -182,6 +192,21 @@ describe('SMOKE mobile', () => {
           .should('contain', 'CRITERIA')
           .and('contain', 'RESULTS')
           .and('contain', 'VIEW')
+        cy.get('[id="workflow-supervisor-criteria-detail"]')
+          .should('contain', 'Workflow')
+          .and('contain', 'Status')
+          .and('contain', 'Category')
+          .and('contain', 'Property Filter')
+          .and('contain', 'Property Value')
+          .and('contain', 'Search')
+        cy.contains('change category').should('be.visible')
+        cy.contains('change status').should('be.visible')
+        cy.get('button').contains('Save Category')
+          .should('be.visible')
+          .and('not.be.enabled')
+        cy.get('button').contains('Save Status')
+          .should('be.visible')
+          .and('not.be.enabled')
         cy.contains('Supervisor').find('.fa-caret-down').click()
         cy.get('.mat-menu-content').contains('Delegate').click().wait(500)
         cy.get('.nav-item').should('contain', 'Delegate')

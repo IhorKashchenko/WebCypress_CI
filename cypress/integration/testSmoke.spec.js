@@ -34,17 +34,18 @@ describe('Login Pege Layout', () => {
 describe('Smoke Test', () => {
 
     beforeEach('open application', () => {
-        cy.openLoginPage()
-        // cy.openCloudLoginPage()
+      cy.openLoginPage()
+      // cy.openCloudLoginPage()
+      if(Cypress.browser.name === 'chrome'){
         onLoginPage.login('ik', '1234')
-        // onLoginPage.loginCloud('ik', '1234')
+      }
+      if(Cypress.browser.name === 'firefox'){
+        onLoginPage.login('ihorKweb4.0', '1234')
+      }
+      if(Cypress.browser.name === 'edge'){
+        onLoginPage.login('ik3', '1234')
+      }
     })
-
-    // afterEach('logOut', () => {
-    //     onLoginPage.logout()
-    // })
-
-    
 
     it('verify navigation across the pages', () => {
         navigateTo.quickSearchPage()
@@ -60,7 +61,7 @@ describe('Smoke Test', () => {
         onLoginPage.logout()
     })
 
-    it.skip('creating IhorDoc Creation SF', () => {
+    it('creating IhorDoc Creation SF', () => {
         navigateTo.smartFormsPage()
         onSFcreationPage.selectIhorDocumentCreation()
         cy.get('[id="toolbar-button-container"]')
@@ -81,6 +82,7 @@ describe('Smoke Test', () => {
         cy.addButtonClick()
         cy.addingPropertyValue('Currency', 'usd')
         cy.addingPropertyValue('PO Amount', '165.25')
+        cy.addingPropertyValue('User Name', 'Ihor')
         cy.createButtonClick()
         cy.get('[id="toast-container"]').should('be.visible') //Document Created message
         cy.contains('Open New Document').should('be.visible')
@@ -101,7 +103,6 @@ describe('Smoke Test', () => {
     })
 
     it('indexNewDocument', () => {
-
         navigateTo.batchIndexPage()
         onBatchIndexPage.openTiffFolder()
         onBatchIndexPage.sendToWorkflowEnableClick()
@@ -115,7 +116,6 @@ describe('Smoke Test', () => {
     })
 
     it('indexNewDocumentSL', () => {
-
         navigateTo.batchIndexPage()
         onBatchIndexPage.openTiffFolder()
         onBatchIndexPage.sendToWorkflowEnableClick()
@@ -185,7 +185,6 @@ describe('Smoke Test', () => {
         cy.EnglishLanguageSelect()
         cy.contains(' Save ').click()
         onLoginPage.logout()
-
     })
 
     it('viewList', () => {
@@ -199,7 +198,6 @@ describe('Smoke Test', () => {
         cy.contains(' View ').should('contain', ' View ')
         cy.contains(' Actions ').should('contain', ' Actions ')
         onLoginPage.logout()
-
     })
 
     it('viewGallery', () => {
@@ -213,10 +211,9 @@ describe('Smoke Test', () => {
         cy.contains('VIEW').should('contain', 'VIEW')
         cy.contains('ACTIONS').should('contain', 'ACTIONS')
         onLoginPage.logout()
-
     })
 
-    it.only('Open document in Workflow Viewer', () => {
+    it('Open document in Workflow Viewer', () => {
         navigateTo.workflowSearchPage()
         cy.selectWFANDStatus('Ihor', 'Auto')
         cy.contains('Search and Open').click().wait(4000)
@@ -252,10 +249,8 @@ describe('Smoke Test', () => {
         .should('be.visible')
         cy.get('.workflow-toolbar').find('.fa-archive')
         .should('be.visible')
-        // cy.get('.workflow-toolbar').find('.fa-times')    // The Sidebar should not be visible. Not fixed yet
-        // .should('not.be.visible')
-        // cy.get('.workflow-toolbar').find('.fa-bars')
-        // .should('be.visible')
+        cy.get('.workflow-toolbar').find('.fa-bars')
+        .should('be.visible')
         cy.get('[id="documentInfoTabs"]')
         .should('contain', 'General')
         .and('contain', 'Notes')
@@ -277,7 +272,6 @@ describe('Smoke Test', () => {
         cy.get('textarea').click().type('The color is Inverted and Test PASS')
         cy.get('button').contains('Ok').click()
         onLoginPage.logout()
-
     })
 
     it('Check Rotation', () => {

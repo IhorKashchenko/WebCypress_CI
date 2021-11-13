@@ -11,9 +11,7 @@ export class LoginPage{
         cy.get('mat-dialog-actions')
         .contains('button', 'No')
         .click({force: true})
-        cy.get('ul').contains('li', 'Search').should('contain', 'Search')
         cy.wait(7000)
-        
     }
 
     loginCloud(username, password){
@@ -24,9 +22,7 @@ export class LoginPage{
         cy.get('mat-dialog-actions')
         .contains('button', 'No')
         .click({force: true})
-        cy.get('ul').contains('li', 'Search').should('contain', 'Search')
         cy.wait(7000)
-        
     }
 
     logout(){
