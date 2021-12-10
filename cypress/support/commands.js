@@ -216,7 +216,7 @@ Cypress.Commands.add('selectSmartForm', () => {
         // }
         else if(docPropertyName == 'Vendor Invoice Sage 300:'){
             cy.openSmartFormList()
-            cy.get('.cdk-overlay-pane').contains('Sage 300').click({force:true})        
+            cy.get('.cdk-overlay-pane').contains('Sage300').click({force:true})        
         }
         // else if(docPropertyName == 'SupCh:'){
         //     cy.openSmartFormList()
@@ -237,9 +237,9 @@ Cypress.Commands.add('openBatchIfLocked', () => {
         if(table.find('.fa-lock').length > 0) {
             cy.get('table').contains('Unlock Batch').click()
             cy.wait(1000)
-            cy.get('.fa-folder-open').click()
+            cy.get('.fa-folder-open').eq(0).click()
         } else {
-            cy.get('.fa-folder-open').click() 
+            cy.get('.fa-folder-open').eq(0).click() 
         }
     })
 })

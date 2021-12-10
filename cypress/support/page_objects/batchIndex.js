@@ -5,7 +5,7 @@ export class BatchIndex{
             cy.wait(2000)
             cy.wrap(indexDropdown).click({force:true})
             cy.wait(2000)
-            cy.contains("\\\WA10IKASHCHENKO\\scan\\PDF's").click()
+            cy.contains("\\\wa12nas03\\Users\\IhorK\\Tiff").click()
             // cy.get('.mat-select-panel mat-option').eq(5).click()
             cy.wait(2000)
         })

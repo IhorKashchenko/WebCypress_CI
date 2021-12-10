@@ -37,7 +37,7 @@ describe('Test with Page Objects', () => {
         onLoginPage.logout()
     })
 
-    it('creatingSage300', () => {
+    it.skip('creatingSage300', () => {
 
         navigateTo.batchIndexPage()
         onBatchIndexPage.openTiffFolder()
