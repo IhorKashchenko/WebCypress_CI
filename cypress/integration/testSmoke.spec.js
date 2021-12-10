@@ -108,6 +108,10 @@ describe('Smoke Test', () => {
         onBatchIndexPage.sendToWorkflowEnableClick()
         cy.workflowDocTypeSelect('AP Sage 300')    
         onBatchIndexPage.saveButtonClick()
+        //Copy document
+        cy.get('[id="batchindex-copy-selected"]').click({force:true})
+        cy.get('.mat-dialog-container').find('input').clear({force:true}).type(15)
+        cy.get('button').contains('Ok').click({force:true})
         onBatchIndexPage.searchNewCreatedDoc()
         cy.openFirstDocument()
         cy.selectSmartForm()
