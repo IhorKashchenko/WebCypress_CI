@@ -417,4 +417,28 @@ describe('Smoke Test', () => {
         onLoginPage.logout()
         
     })
+
+    it.skip('creating smart form', () => {
+      cy.navigateToSearchByID()
+      cy.get('[id="searchByIdForm"]').find('input').type(37637)
+      cy.get('[type="submit"]').click()
+      cy.openFirstDocument()
+      cy.selectThisSmartform('ExpChg')
+      cy.expandButtonClick()
+      cy.startButtonClick()
+      cy.appendButtonClick()
+      cy.collapseButtonClick()
+      cy.selectThisSmartform('Acumatica')
+      onLoginPage.logout()
+      if(Cypress.browser.name === 'chrome'){
+        onLoginPage.loginNoDialog('ik', '1234')
+      }
+      if(Cypress.browser.name === 'firefox'){
+        onLoginPage.loginNoDialog('ihorKweb4.0', '1234')
+      }
+      if(Cypress.browser.name === 'edge'){
+        onLoginPage.loginNoDialog('ik3', '1234')
+      }
+      cy.openSmartFormList()
+    })
 })

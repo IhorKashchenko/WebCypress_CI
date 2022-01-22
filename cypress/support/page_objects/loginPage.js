@@ -14,6 +14,13 @@ export class LoginPage{
         cy.wait(7000)
     }
 
+    loginNoDialog(username, password){
+        cy.get('form').contains('mat-form-field', 'Login').type(username)
+        cy.get('form').contains('mat-form-field', 'Password').type(password)
+        cy.get('[type="submit"]').click()
+        cy.wait(7000)
+    }
+
     loginCloud(username, password){
         cy.get('form').contains('mat-form-field', 'Site Code').type('40test')
         cy.get('form').contains('mat-form-field', 'Login').type(username)
