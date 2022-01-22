@@ -10,7 +10,7 @@
   "defaultCommandTimeout": 10000,
   "retries": {
     "runMode": 1,
-    "openMode": 1
+    "openMode": 0
   },
   "projectId": "18n3zg"
 }

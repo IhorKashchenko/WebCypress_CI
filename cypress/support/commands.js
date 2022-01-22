@@ -135,10 +135,16 @@ Cypress.Commands.add('createButtonClick', () => {
     cy.wait(1000)
 })
 
+Cypress.Commands.add('collapseButtonClick', () => {
+    cy.get('as-split-area').find('.fa-compress-alt').click()
+    cy.wait(500)
+})
+
 Cypress.Commands.add('expandButtonClick', () => {
     cy.get('as-split-area').find('.fa-expand-alt').click()
     cy.wait(500)
 })
+
 
 Cypress.Commands.add('addingPropertyValue', (prop, value) => {
     cy.contains(prop)
@@ -151,14 +157,25 @@ Cypress.Commands.add('addingPropertyValue', (prop, value) => {
 
 // Select Smart Form Dropdown button in the Viewer
 Cypress.Commands.add('openSmartFormList', () => {
-    cy.get('mat-toolbar').find('button').eq(1).click()
-    cy.wait(500)
+    cy.get('#document').within(() => {
+        cy.get('#workflowtoolbar-smartforms').click()
+        cy.wait(1000)
+    })
 })
 
 // Hide Smart Form Button
 Cypress.Commands.add('hideSmartForm', () => {
     cy.get('.cdk-overlay-pane').contains(' Hide Smart Forms ').click({force:true})
     cy.wait(500)
+})
+
+//Select Smart specific form 
+Cypress.Commands.add('selectThisSmartform', (form) => {
+    cy.get('#document').within(() => {
+        cy.get('#workflowtoolbar-smartforms').click()
+        cy.wait(1000)
+    })
+    cy.get('.mat-menu-content').contains('button', form).click({force:true})
 })
 
 // Select Smart Form depends on Doc Type
