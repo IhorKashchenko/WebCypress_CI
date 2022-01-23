@@ -3,7 +3,7 @@
 
 describe('API CLOUD test', () => {
 
-    it('Get AuthCode', () => {
+    before('token', () => {
         cy.request({
             method: 'POST',
             url: 'https://test.altec-cloud.com/DocLinkWebService/api/Security/LoginViaProfile',
@@ -26,6 +26,19 @@ describe('API CLOUD test', () => {
         })
     })
 
+    after('LOGOUT', () => {
+        
+        cy.request({
+            method: 'POST',
+            url: 'https://test.altec-cloud.com/DocLinkWebService/api/Security/Logout',
+            headers: {
+                AuthCode: window.token
+            }
+        }).then((res) => {
+            expect(res.status).to.be.eq(200)
+        })
+    })
+
     it('Get Doc ID data for doc 123', () => {
         cy.request({
             method: 'GET',
@@ -35,13 +48,15 @@ describe('API CLOUD test', () => {
             }
         }).then((res) => {
             expect(res.status).to.be.eq(200)
-            // expect(res.body[0]).to.have.property('BatchName')
+            expect(res.body[0]).to.have.property('DocumentID')
             // expect(res.body[0].BatchFileId).to.eq('70')
             // expect(res.body[0].Created).to.eq('4/8/2019 10:03:00 AM')
             cy.log(JSON.stringify(res.body))
         })
     })
+
 // Verifying Smart Forms from the Main Tab
+
     it('Smart Forms verification Expense Report (W/ Attachments)', () => {
         cy.request({
             method: 'GET',
@@ -309,17 +324,4 @@ describe('API CLOUD test', () => {
             cy.log(JSON.stringify(res.body))
         })
     })
-    
-    it('logout', () => {
-        cy.request({
-            method: 'POST',
-            url: 'https://test.altec-cloud.com/DocLinkWebService/api/Security/Logout',
-            headers: {
-                AuthCode: window.token
-            }
-        }).then((res) => {
-            expect(res.status).to.be.eq(200)
-        })
-    })
-
 })

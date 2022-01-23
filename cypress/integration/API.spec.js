@@ -3,7 +3,7 @@
 
 describe('API test', () => {
 
-    it('Get AuthCode', () => {
+    before('GET AuthCode', () => {
         cy.request({
             method: 'POST',
             url: 'https://wa19qa40.altec-wa.com/DocLinkWebService/api/Security/LoginViaProfile',
@@ -20,7 +20,19 @@ describe('API test', () => {
                 expect(res.body).to.have.property('AuthCode')
                 window.token = res.body.AuthCode
         })
-    })  
+    })
+
+    after('LOGOUT', () => {
+        cy.request({
+            method: 'POST',
+            url: 'https://wa19qa40.altec-wa.com/DocLinkWebService/api/Security/Logout',
+            headers: {
+                AuthCode: window.token
+            }
+        }).then((res) => {
+            expect(res.status).to.be.eq(200)
+        })
+    })
 
     it('Get Doc ID data for doc 123', () => {
         cy.request({
@@ -433,17 +445,4 @@ describe('API test', () => {
             cy.log(JSON.stringify(res.body))
         })
     })
-
-    it('logout', () => {
-        cy.request({
-            method: 'POST',
-            url: 'https://wa19qa40.altec-wa.com/DocLinkWebService/api/Security/Logout',
-            headers: {
-                AuthCode: window.token
-            }
-        }).then((res) => {
-            expect(res.status).to.be.eq(200)
-        })
-    })
-
 });
