@@ -417,7 +417,7 @@ describe('Smoke Test', () => {
         onLoginPage.logout()
         
     })
-
+// Activate after bug fix
     it.skip('creating smart form', () => {
       cy.navigateToSearchByID()
       cy.get('[id="searchByIdForm"]').find('input').type(37637)
@@ -440,5 +440,49 @@ describe('Smoke Test', () => {
         onLoginPage.loginNoDialog('ik3', '1234')
       }
       cy.openSmartFormList()
+      cy.get('.cdk-overlay-pane').find('button').each((button) => {
+        cy.get(button).should('be.enabled')
+      })
+    })
+
+    it('Verify aditional criteria checkboxes', () => {
+      let items = []
+      navigateTo.advancedSearchPage()
+      cy.get('[id="additional-criteria-section"]').within(() => {
+        cy.get('.mat-body-1').eq(1).find('.mat-checkbox').each(($el) => {
+          cy.get($el).invoke('text').then((text1) => {
+            items.push(text1)
+          })      
+        })
+      }).then(() => {
+        for(let i = 0; i < items.length; i++) {
+          expect(items[i]).not.equal(items[i + 1])
+          expect(items.length).to.equal(5)
+          //cy.findElement(items[i]).should('not.to.be.equal', items[i + 1])
+          cy.log(items[i], items[i + 1])            
+        }
+      })
+      onLoginPage.logout()
+    })
+
+// Need finish this test
+    it.skip('check same doc type', () => {
+      let name = []
+      cy.navigateToSearchByID()
+      cy.get('[id="searchByIdForm"]').find('input').type('28068;28064;28088;28175;28176;28059')
+      cy.get('[type="submit"]').click().wait(1000) 
+
+      cy.get('tbody tr').each(($el) => {
+        cy.get('[class="ng-star-inserted"]').contains('Ihor').invoke('text').then((text) => {
+          name.push(text)
+          cy.log(name)
+        })
+      }).then(() => {
+        for(let i = 0; i < name.length; i++) {
+          expect(name[i]).to.equal(name[i + 1])
+          //cy.findElement(name[i]).should('not.to.be.equal', name[i + 1])
+          cy.log(name[i], name[i + 1])            
+        }
+      })
     })
 })
