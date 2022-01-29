@@ -1,5 +1,31 @@
 /// <reference types="cypress" />
 
+const baseUrlQA = 'https://wa19qa40.altec-wa.com'
+
+const allUrl = [
+     baseUrlQA+'/DocLinkWebService/api/DocumentInquiry/CustomInquiries',
+     baseUrlQA+'/DocLinkWebService/api/DocumentInquiry/SavedInquiries',
+    baseUrlQA+'/DocLinkWebService/api/Workflow/WorkflowFavorites',
+    baseUrlQA+'/DocLinkWebService/api/Workflow/UserWorkflowDelegations',
+    baseUrlQA+'/DocLinkWebService/api/Workflow/QueuesForWorkflow?workflowId=10000',
+    baseUrlQA+'/DocLinkWebService/api/Workflow/WorkflowDelegations',
+    baseUrlQA+'/DocLinkWebService/api/Files/PrintSeparatorPage',
+    baseUrlQA+'/DocLinkWebService/api/Files/DownloadSeparatorPage',
+
+    baseUrlQA+'/DocLinkWebService/api/Document/GetOriginationData?documentId=17',
+    baseUrlQA+'/DocLinkWebService/api/Document/GetIndexData?documentId=17',
+    baseUrlQA+'/DocLinkWebService/api/Document/Notes?id=17',
+    baseUrlQA+'/DocLinkWebService/api/Document/GetAnnotationSummary?documentId=17',
+    baseUrlQA+'/DocLinkWebService/api/Document/GetAuditHist?documentId=17',
+    baseUrlQA+'/DocLinkWebService/api/Document/GetIndexData?documentId=17',
+    baseUrlQA+'/DocLinkWebService/api/DocumentImage/GetPageProperties?documentId=17&pageNum=1',
+    baseUrlQA+'/DocLinkWebService/api/DocumentImage/NativeFile/17',
+    baseUrlQA+'/DocLinkWebService/api/DocumentImage/PDF?id=17&addNotes=false',
+    baseUrlQA+'/DocLinkWebService/api/DocumentImage/PDF?id=17&addNotes=true',
+
+]
+
+
 
 describe('API test', () => {
 
@@ -37,7 +63,7 @@ describe('API test', () => {
     it('Get Doc ID data for doc 123', () => {
         cy.request({
             method: 'GET',
-            url: 'https://wa19qa40.altec-wa.com/DocLinkWebService/api/Document/GetOriginationData?documentId=123',
+            url: baseUrlQA+'/DocLinkWebService/api/Document/GetOriginationData?documentId=123',
             headers: {
                 AuthCode: window.token
             }
@@ -50,399 +76,20 @@ describe('API test', () => {
         })
     })
 
-    //Verifying Smart Forms on the Main tab
-
-    it('Smart Forms verification Visa CC Processing', () => {
-        cy.request({
-            method: 'GET',
-            url: 'https://wa19qa40.altec-wa.com/DocLinkWebService/api/SmartForms/GetClientTabSmartForms?tabId=10005',
-            headers: {
-                AuthCode: window.token
-            }
-        }).then((res) => {
-            expect(res.status).to.be.eq(200)
-            expect(res.body[0].Description).to.eq('Visa CC Processing')
-            cy.log(JSON.stringify(res.body))
-        })
-    })
-
-    it('Smart Forms verification Expense Report (W/ Combined Attachments)', () => {
-        cy.request({
-            method: 'GET',
-            url: 'https://wa19qa40.altec-wa.com/DocLinkWebService/api/SmartForms/GetClientTabSmartForms?tabId=10001',
-            headers: {
-                AuthCode: window.token
-            }
-        }).then((res) => {
-            expect(res.status).to.be.eq(200)
-            expect(res.body[0].Description).to.eq('Expense Report (W/ Combined Attachments)')
-            cy.log(JSON.stringify(res.body))
-        })
-    })    
-
-    it('Smart Forms verification Ihor Bool only', () => {
-        cy.request({
-            method: 'GET',
-            url: 'https://wa19qa40.altec-wa.com/DocLinkWebService/api/SmartForms/GetClientTabSmartForms?tabId=10008',
-            headers: {
-                AuthCode: window.token
-            }
-        }).then((res) => {
-            expect(res.status).to.be.eq(200)
-            expect(res.body[0].Description).to.eq('Ihor Bool only')
-            cy.log(JSON.stringify(res.body))
-        })
-    })
-
-    it('Smart Forms verification Ihor Doc Creation Test', () => {
-        cy.request({
-            method: 'GET',
-            url: 'https://wa19qa40.altec-wa.com/DocLinkWebService/api/SmartForms/GetClientTabSmartForms?tabId=10003',
-            headers: {
-                AuthCode: window.token
-            }
-        }).then((res) => {
-            expect(res.status).to.be.eq(200)
-            expect(res.body[0].Description).to.eq('Ihor Doc Creation Test')
-            cy.log(JSON.stringify(res.body))
-        })
-    })
-
-    it('Smart Forms verification Jake\'s Doc Creation Test', () => {
-        cy.request({
-            method: 'GET',
-            url: 'https://wa19qa40.altec-wa.com/DocLinkWebService/api/SmartForms/GetClientTabSmartForms?tabId=10002',
-            headers: {
-                AuthCode: window.token
-            }
-        }).then((res) => {
-            expect(res.status).to.be.eq(200)
-            expect(res.body[0].Description).to.eq('Jake\'s Doc Creation Test')
-            cy.log(JSON.stringify(res.body))
-        })
-    })
-
-    it('Smart Forms verification James Document Processing', () => {
-        cy.request({
-            method: 'GET',
-            url: 'https://wa19qa40.altec-wa.com/DocLinkWebService/api/SmartForms/GetClientTabSmartForms?tabId=10006',
-            headers: {
-                AuthCode: window.token
-            }
-        }).then((res) => {
-            expect(res.status).to.be.eq(200)
-            expect(res.body[0].Description).to.eq('James Document Processing')
-            cy.log(JSON.stringify(res.body))
-        })
-    })
-
-    it('Smart Forms verification w/ XSLT Template', () => {
-        cy.request({
-            method: 'GET',
-            url: 'https://wa19qa40.altec-wa.com/DocLinkWebService/api/SmartForms/GetClientTabSmartForms?tabId=10007',
-            headers: {
-                AuthCode: window.token
-            }
-        }).then((res) => {
-            expect(res.status).to.be.eq(200)
-            expect(res.body[0].Description).to.eq('w/ XSLT Template')
-            cy.log(JSON.stringify(res.body))
-        })
-    })
-
-//Verifying Smart Forms from the Viewer
-
-    it('Smart Forms verification Acumatica', () => {
-        cy.request({
-            method: 'GET',
-            url: 'https://wa19qa40.altec-wa.com/DocLinkWebService/api/SmartForms/GetViewerTabSmartForms?tabId=10002&documentId=123',
-            headers: {
-                AuthCode: window.token
-            }
-        }).then((res) => {
-            expect(res.status).to.be.eq(200)
-            expect(res.body[0].Description).to.eq('Acumatica 2017R2')
-            cy.log(JSON.stringify(res.body))
-        })
-    })
-
-    it('Smart Forms verification Dynamics Business Central GL', () => {
-        cy.request({
-            method: 'GET',
-            url: 'https://wa19qa40.altec-wa.com/DocLinkWebService/api/SmartForms/GetViewerTabSmartForms?tabId=10018&documentId=123',
-            headers: {
-                AuthCode: window.token
-            }
-        }).then((res) => {
-            expect(res.status).to.be.eq(200)
-            expect(res.body[0].Description).to.eq('Dynamics Business Central GL Smart Form')
-            cy.log(JSON.stringify(res.body))
-        })
-    })
-
-    it('Smart Forms verification Dynamics 365', () => {
-        cy.request({
-            method: 'GET',
-            url: 'https://wa19qa40.altec-wa.com/DocLinkWebService/api/SmartForms/GetViewerTabSmartForms?tabId=10008&documentId=123',
-            headers: {
-                AuthCode: window.token
-            }
-        }).then((res) => {
-            expect(res.status).to.be.eq(200)
-            expect(res.body[0].Description).to.eq('Dynamics 365 for Finance and Operations, Enterprise Edition GL Smart Form')
-            cy.log(JSON.stringify(res.body))
-        })
-    })
-
-    it('Smart Forms verification 1/11/21 -test add/remove', () => {
-        cy.request({
-            method: 'GET',
-            url: 'https://wa19qa40.altec-wa.com/DocLinkWebService/api/SmartForms/GetViewerTabSmartForms?tabId=10022&documentId=123',
-            headers: {
-                AuthCode: window.token
-            }
-        }).then((res) => {
-            expect(res.status).to.be.eq(200)
-            expect(res.body[0].Description).to.eq('1/11/21 -test add/remove')
-            cy.log(JSON.stringify(res.body))
-        })
-    })
-
-    it('Smart Forms verification Page Creation (W/ Attachments)', () => {
-        cy.request({
-            method: 'GET',
-            url: 'https://wa19qa40.altec-wa.com/DocLinkWebService/api/SmartForms/GetViewerTabSmartForms?tabId=10000&documentId=123',
-            headers: {
-                AuthCode: window.token
-            }
-        }).then((res) => {
-            expect(res.status).to.be.eq(200)
-            expect(res.body[0].Description).to.eq('Page Creation (W/ Attachments)')
-            cy.log(JSON.stringify(res.body))
-        })
-    })
-
-    it('Smart Forms verification Screen import for GP 10 - 2015', () => {
-        cy.request({
-            method: 'GET',
-            url: 'https://wa19qa40.altec-wa.com/DocLinkWebService/api/SmartForms/GetViewerTabSmartForms?tabId=10009&documentId=123',
-            headers: {
-                AuthCode: window.token
-            }
-        }).then((res) => {
-            expect(res.status).to.be.eq(200)
-            expect(res.body[0].Description).to.eq('Screen import for GP 10 - 2015')
-            cy.log(JSON.stringify(res.body))
-        })
-    })
-
-    it('Smart Forms verification Screen import for GP 10 - 2015', () => {
-        cy.request({
-            method: 'GET',
-            url: 'https://wa19qa40.altec-wa.com/DocLinkWebService/api/SmartForms/GetViewerTabSmartForms?tabId=10016&documentId=123',
-            headers: {
-                AuthCode: window.token
-            }
-        }).then((res) => {
-            expect(res.status).to.be.eq(200)
-            expect(res.body[0].Description).to.eq('Screen import for GP 10 - 2015')
-            cy.log(JSON.stringify(res.body))
-        })
-    })
-
-    it('Smart Forms verification Web service import for GP 2013', () => {
-        cy.request({
-            method: 'GET',
-            url: 'https://wa19qa40.altec-wa.com/DocLinkWebService/api/SmartForms/GetViewerTabSmartForms?tabId=10001&documentId=123',
-            headers: {
-                AuthCode: window.token
-            }
-        }).then((res) => {
-            expect(res.status).to.be.eq(200)
-            expect(res.body[0].Description).to.eq('Web service import for GP 2013')
-            cy.log(JSON.stringify(res.body))
-        })
-    })
-
-    it('Smart Forms verification Ihor Page Creation Test', () => {
-        cy.request({
-            method: 'GET',
-            url: 'https://wa19qa40.altec-wa.com/DocLinkWebService/api/SmartForms/GetViewerTabSmartForms?tabId=10014&documentId=123',
-            headers: {
-                AuthCode: window.token
-            }
-        }).then((res) => {
-            expect(res.status).to.be.eq(200)
-            expect(res.body[0].Description).to.eq('Ihor Page Creation Test')
-            cy.log(JSON.stringify(res.body))
-        })
-    })
-
-    it('Smart Forms verification IHOR Sage_300 5.6a - 2014', () => {
-        cy.request({
-            method: 'GET',
-            url: 'https://wa19qa40.altec-wa.com/DocLinkWebService/api/SmartForms/GetViewerTabSmartForms?tabId=10015&documentId=123',
-            headers: {
-                AuthCode: window.token
-            }
-        }).then((res) => {
-            expect(res.status).to.be.eq(200)
-            expect(res.body[0].Description).to.eq('IHOR Sage_300 5.6a - 2014')
-            cy.log(JSON.stringify(res.body))
-        })
-    })
-
-    it('Smart Forms verification Sage Intacct GL Smart Form', () => {
-        cy.request({
-            method: 'GET',
-            url: 'https://wa19qa40.altec-wa.com/DocLinkWebService/api/SmartForms/GetViewerTabSmartForms?tabId=10012&documentId=123',
-            headers: {
-                AuthCode: window.token
-            }
-        }).then((res) => {
-            expect(res.status).to.be.eq(200)
-            expect(res.body[0].Description).to.eq('Sage Intacct GL Smart Form')
-            cy.log(JSON.stringify(res.body))
-        })
-    })
-
-    it('Smart Forms verification Jake\'s Doc Creation Test', () => {
-        cy.request({
-            method: 'GET',
-            url: 'https://wa19qa40.altec-wa.com/DocLinkWebService/api/SmartForms/GetViewerTabSmartForms?tabId=10003&documentId=123',
-            headers: {
-                AuthCode: window.token
-            }
-        }).then((res) => {
-            expect(res.status).to.be.eq(200)
-            expect(res.body[0].Description).to.eq('Jake\'s Doc Creation Test')
-            cy.log(JSON.stringify(res.body))
-        })
-    })
-
-    it('Smart Forms verification Jake\'s Dynamics GP GL', () => {
-        cy.request({
-            method: 'GET',
-            url: 'https://wa19qa40.altec-wa.com/DocLinkWebService/api/SmartForms/GetViewerTabSmartForms?tabId=10005&documentId=123',
-            headers: {
-                AuthCode: window.token
-            }
-        }).then((res) => {
-            expect(res.status).to.be.eq(200)
-            expect(res.body[0].Description).to.eq('Jake\'s Dynamics GP GL Smart Form Web service import for GP 2013')
-            cy.log(JSON.stringify(res.body))
-        })
-    })
-
-    it('Smart Forms verification eConnect import for BS/Key2Act 2016', () => {
-        cy.request({
-            method: 'GET',
-            url: 'https://wa19qa40.altec-wa.com/DocLinkWebService/api/SmartForms/GetViewerTabSmartForms?tabId=10019&documentId=123',
-            headers: {
-                AuthCode: window.token
-            }
-        }).then((res) => {
-            expect(res.status).to.be.eq(200)
-            expect(res.body[0].Description).to.eq('eConnect import for BS/Key2Act 2016')
-            cy.log(JSON.stringify(res.body))
-        })
-    })
-
-    it('Smart Forms verification Web service import for NAV 2016 and higher', () => {
-        cy.request({
-            method: 'GET',
-            url: 'https://wa19qa40.altec-wa.com/DocLinkWebService/api/SmartForms/GetViewerTabSmartForms?tabId=10020&documentId=123',
-            headers: {
-                AuthCode: window.token
-            }
-        }).then((res) => {
-            expect(res.status).to.be.eq(200)
-            expect(res.body[0].Description).to.eq('Web service import for NAV 2016 and higher')
-            cy.log(JSON.stringify(res.body))
-        })
-    })
-
-    it('Smart Forms verification SL 7.0 - 2015', () => {
-        cy.request({
-            method: 'GET',
-            url: 'https://wa19qa40.altec-wa.com/DocLinkWebService/api/SmartForms/GetViewerTabSmartForms?tabId=10010&documentId=123',
-            headers: {
-                AuthCode: window.token
-            }
-        }).then((res) => {
-            expect(res.status).to.be.eq(200)
-            expect(res.body[0].Description).to.eq('SL 7.0 - 2015')
-            cy.log(JSON.stringify(res.body))
-        })
-    })
-
-    it('Smart Forms verification Sage 100 4.3 - 2014', () => {
-        cy.request({
-            method: 'GET',
-            url: 'https://wa19qa40.altec-wa.com/DocLinkWebService/api/SmartForms/GetViewerTabSmartForms?tabId=10011&documentId=123',
-            headers: {
-                AuthCode: window.token
-            }
-        }).then((res) => {
-            expect(res.status).to.be.eq(200)
-            expect(res.body[0].Description).to.eq('Sage 100 4.3 - 2014')
-            cy.log(JSON.stringify(res.body))
-        })
-    })
-
-    it('Smart Forms verification Sage 300 5.6a - 2014', () => {
-        cy.request({
-            method: 'GET',
-            url: 'https://wa19qa40.altec-wa.com/DocLinkWebService/api/SmartForms/GetViewerTabSmartForms?tabId=10006&documentId=123',
-            headers: {
-                AuthCode: window.token
-            }
-        }).then((res) => {
-            expect(res.status).to.be.eq(200)
-            expect(res.body[0].Description).to.eq('Sage 300 5.6a - 2014')
-            cy.log(JSON.stringify(res.body))
-        })
-    })
-
-    it('Smart Forms verification Sage 500 7.0 - 2014', () => {
-        cy.request({
-            method: 'GET',
-            url: 'https://wa19qa40.altec-wa.com/DocLinkWebService/api/SmartForms/GetViewerTabSmartForms?tabId=10021&documentId=123',
-            headers: {
-                AuthCode: window.token
-            }
-        }).then((res) => {
-            expect(res.status).to.be.eq(200)
-            expect(res.body[0].Description).to.eq('Sage 500 7.0 - 2014')
-            cy.log(JSON.stringify(res.body))
-        })
-    })
-
-    it('Smart Forms verification w/ XSLT Template', () => {
-        cy.request({
-            method: 'GET',
-            url: 'https://wa19qa40.altec-wa.com/DocLinkWebService/api/SmartForms/GetViewerTabSmartForms?tabId=10017&documentId=123',
-            headers: {
-                AuthCode: window.token
-            }
-        }).then((res) => {
-            expect(res.status).to.be.eq(200)
-            expect(res.body[0].Description).to.eq('w/ XSLT Template')
-            cy.log(JSON.stringify(res.body))
-        })
-    })
-
-    it('Smart Forms verification Sage X3 GL Smart Form', () => {
-        cy.request({
-            method: 'GET',
-            url: 'https://wa19qa40.altec-wa.com/DocLinkWebService/api/SmartForms/GetViewerTabSmartForms?tabId=10013&documentId=123',
-            headers: {
-                AuthCode: window.token
-            }
-        }).then((res) => {
-            expect(res.status).to.be.eq(200)
-            expect(res.body[0].Description).to.eq('Sage X3 GL Smart Form')
-            cy.log(JSON.stringify(res.body))
-        })
+    it('MAIN LINKS verification', () => {
+        for(let i = 0; i< allUrl.length; i++) {
+            cy.request({
+                method: 'GET',
+                url: allUrl[i],
+                headers: {
+                    AuthCode: window.token
+                }
+            })
+            .then((res) => {
+                expect(res.status).to.be.eq(200)
+            })
+            
+        }
+        
     })
 });

@@ -5,7 +5,9 @@
   "main": "index.js",
   "dependencies": {},
   "devDependencies": {
-    "cypress": "^8.6.0",
+    "@testing-library/cypress": "^8.0.2",
+    "cypress": "^8.7.0",
+    "prettier": "2.5.1",
     "typescript": "3.4.5"
   },
   "scripts": {
@@ -14,8 +16,6 @@
     "cy:run_par": "npm run cy:run_spec_loc -- --browser chrome & npm run cy:run_spec_loc -- --browser firefox & npm run cy:run_spec_loc -- --browser edge",
     "cy:run_spec": "npx cypress run --spec 'cypress/integration/*.spec.js' --record --key 5adbca6e-06eb-4f71-a410-fe391f02e416",
     "cy:run_browser": "npm run cy:run_spec -- --browser chrome & npm run cy:run_spec -- --browser firefox & npm run cy:run_spec -- --browser edge"
-    
-
   },
   "repository": {
     "type": "git",

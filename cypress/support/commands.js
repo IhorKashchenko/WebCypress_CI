@@ -24,6 +24,8 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
+import '@testing-library/cypress/add-commands';
+
 // const { ElementFinder } = require("protractor")
 
 /*********************************************************************************************
@@ -45,7 +47,7 @@
  */
 
 Cypress.Commands.add('openLoginPage', () => {
-    cy.visit('/')
+    cy.visit('/DoclinkWeb/#/login')
 })
 
 Cypress.Commands.add('openCloudLoginPage', () => {
@@ -317,4 +319,8 @@ Cypress.Commands.add('selectWFANDStatus', (wf, status) => {
     cy.get('[class="cdk-overlay-pane"]').contains(wf).click()
     cy.get('[id="workflowsearchlist"]').contains('Status').click({force:true})
     cy.get('[class="cdk-overlay-pane"]').contains(status).click()
+})
+
+Cypress.Commands.add('findElement' , (elName) => {
+    cy.findAllByAltText(elName)
 })
