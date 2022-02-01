@@ -6,7 +6,6 @@ import { onSFcreationPage } from "../support/page_objects/smartFormsPageCreation
 import { onBatchIndexPage } from "../support/page_objects/batchIndex"
 
 
-
 describe('Login Pege Layout', () => {
 
     it('Login Pege Layout', () => {
@@ -283,15 +282,15 @@ describe('Smoke Test', () => {
         cy.selectWFANDStatus('Ihor', 'Auto')
         cy.contains('Search and Open').click().wait(4000)
         cy.get('[class="canvas-container"]').should('have.attr', 'style').should('contain' ,'transform: rotate(0deg)')
-        cy.RotateLeftClick()
+        cy.RotateLeftClick().screenshot('left').as('left')
         cy.get('[class="canvas-container"]').should('have.attr', 'style').should('contain' ,'transform: rotate(270deg)')
         cy.RotateLeftClick()
         cy.get('[class="canvas-container"]').should('have.attr', 'style').should('contain' ,'transform: rotate(180deg)')
         cy.RotateLeftClick()
         cy.get('[class="canvas-container"]').should('have.attr', 'style').should('contain' ,'transform: rotate(90deg)')
-        cy.RotateLeftClick()
+        cy.RotateLeftClick().screenshot('basic1').as('basic1')
         cy.get('[class="canvas-container"]').should('have.attr', 'style').should('contain' ,'transform: rotate(0deg)')
-        cy.RotateRightClick()
+        cy.RotateRightClick().screenshot('right').as('rignt')
         cy.get('[class="canvas-container"]').should('have.attr', 'style').should('contain' ,'transform: rotate(90deg)')
         cy.RotateRightClick()
         cy.get('[class="canvas-container"]').should('have.attr', 'style').should('contain' ,'transform: rotate(180deg)')
@@ -299,6 +298,10 @@ describe('Smoke Test', () => {
         cy.get('[class="canvas-container"]').should('have.attr', 'style').should('contain' ,'transform: rotate(270deg)')
         cy.RotateRightClick()
         cy.get('[class="canvas-container"]').should('have.attr', 'style').should('contain' ,'transform: rotate(0deg)')
+        if("@basic" === '@left' || '@basic' === '@right' || '@left' === '@right') {
+          cy.log('FAIL!!!')
+          cy.get('[input=testFail]')
+        }
         cy.get('[id="documentInfoTabs"]').contains('Notes').click()
         cy.get('.infoNote').first().click()
         cy.get('textarea').click().type('The image is Rotated and Test PASS')
