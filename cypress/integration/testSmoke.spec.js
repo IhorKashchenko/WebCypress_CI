@@ -421,7 +421,7 @@ describe('Smoke Test', () => {
         
     })
 // Activate after bug fix
-    it.skip('creating smart form', () => {
+    it.skip('verifying that smart form is not selected after user log back in', () => {
       cy.navigateToSearchByID()
       cy.get('[id="searchByIdForm"]').find('input').type(37637)
       cy.get('[type="submit"]').click()
@@ -488,4 +488,19 @@ describe('Smoke Test', () => {
         }
       })
     })
+})
+
+describe('intercept', () => {
+
+  it('intercept', () => {
+
+    cy.intercept('POST', '**/GetSiteInfo').as('postGetSite')
+
+    cy.visit('https://wa19qa40.altec-wa.com/DocLinkWeb/#/login')
+
+    cy.wait('@postGetSite')
+    cy.get('@postGetSite').then( xhr => {
+      console.log(xhr)
+    })
+  })
 })

@@ -237,6 +237,10 @@ Cypress.Commands.add('selectSmartForm', () => {
             cy.openSmartFormList()
             cy.get('.cdk-overlay-pane').contains('Sage300').click({force:true})        
         }
+        else if(docPropertyName == 'Business Central Invoice:'){
+            cy.openSmartFormList()
+            cy.get('.cdk-overlay-pane').contains('BC').click({force:true})        
+        }
         // else if(docPropertyName == 'SupCh:'){
         //     cy.openSmartFormList()
         //     cy.get('.cdk-overlay-pane').contains('SupCh').click({force:true})        

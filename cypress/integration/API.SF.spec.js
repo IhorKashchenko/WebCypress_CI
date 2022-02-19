@@ -39,34 +39,6 @@ describe('API test', () => {
         })
     })
 
-    it.skip('ALL Smart Forms verification', () => {
-        for(let i = 0; i< urls.length; i++) {
-            cy.request({
-                method: 'GET',
-                url: urls[i],
-                headers: {
-                    AuthCode: window.token
-                }
-            })
-            .then((res) => {
-                expect(res.status).to.be.eq(200)
-                cy.wrap(res.body[0].Name).should('not.be.empty')
-                cy.log(JSON.stringify(res.body))
-            })
-            cy.request({
-                method: 'POST',
-                url: baseUrlQA+'/DocLinkSmartFormService/api/DistributionStamp/GetSmartFormConfig',
-                body: {
-                    "Settings":{"CustomSettings":[{"Name":"showBurnWarning","Setting":true}]}
-                }
-            }).should((resp) => {
-                expect(resp.status).to.be.eq(200)
-                //cy.log(JSON.stringify(resp.body))
-            })
-        }
-        
-    })
-
     it('Get List Of Smart Forms for Viewer Tabs', () => {
         cy.request({
             method: 'GET',
@@ -150,7 +122,5 @@ describe('API test', () => {
                 //cy.log(JSON.stringify(resp.body))
             })
         }
-        
     })
-
 })

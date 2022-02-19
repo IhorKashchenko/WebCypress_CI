@@ -4,7 +4,7 @@ import { onLoginPage }  from "../support/page_objects/loginPage"
 import { navigateTo } from "../support/page_objects/navigationPage"
 import { onBatchIndexPage } from "../support/page_objects/batchIndex"
 
-describe('Test with Page Objects', () => {
+describe('Create SF from Template', () => {
 
     beforeEach('open application', () => {
         cy.openLoginPage()
@@ -15,7 +15,7 @@ describe('Test with Page Objects', () => {
     //     onLoginPage.logout()
     // })
 
-    it('creatingAccumatica', () => {
+    it('creating Accumatica', () => {
 
         navigateTo.batchIndexPage()
         onBatchIndexPage.openTiffFolder()
@@ -37,7 +37,7 @@ describe('Test with Page Objects', () => {
         onLoginPage.logout()
     })
 
-    it.skip('creatingSage300', () => {
+    it.skip('creating Sage300', () => {
 
         navigateTo.batchIndexPage()
         onBatchIndexPage.openTiffFolder()
@@ -59,7 +59,7 @@ describe('Test with Page Objects', () => {
         onLoginPage.logout()
     })
 
-    it('creatingSL', () => {
+    it('creating SL', () => {
 
         navigateTo.batchIndexPage()
         onBatchIndexPage.openTiffFolder()
@@ -81,7 +81,7 @@ describe('Test with Page Objects', () => {
         onLoginPage.logout()
     })
 
-    it('creatingGpBTQ', () => {
+    it('creating GpBTQ', () => {
 
         navigateTo.batchIndexPage()
         onBatchIndexPage.openTiffFolder()
@@ -103,7 +103,7 @@ describe('Test with Page Objects', () => {
         onLoginPage.logout()
     })
 
-    it('creatingExpChg', () => {
+    it('creating ExpChg', () => {
 
         navigateTo.batchIndexPage()
         onBatchIndexPage.openTiffFolder()
@@ -119,5 +119,26 @@ describe('Test with Page Objects', () => {
         cy.appendButtonClick()
         onLoginPage.logout()
     })
-    
+
+    it('Creating BC', () => {
+
+        navigateTo.batchIndexPage()
+        onBatchIndexPage.openTiffFolder()
+        onBatchIndexPage.sendToWorkflowEnableClick()
+        cy.workflowDocTypeSelect('AP Business Central')
+        onBatchIndexPage.saveButtonClick()
+        onBatchIndexPage.searchNewCreatedDoc()
+        cy.openFirstDocument()
+        cy.selectSmartForm()
+        cy.smartFormMenuVerefication()
+        cy.expandButtonClick()
+        cy.createButtonClick()
+        cy.templateButtonClick()
+        cy.contains('BCAuto').click({force:true})
+        cy.wait(500)
+        cy.stampButtonClick()
+        cy.burnWarningYesButtonClick()
+        cy.burnAssertion()
+        onLoginPage.logout()
+    })  
 })
