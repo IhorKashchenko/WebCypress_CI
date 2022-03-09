@@ -13,4 +13,4 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v2
         with:
-          start: npm cy:run_browser_ff
+          start: npm run cy:run_browser_ff
