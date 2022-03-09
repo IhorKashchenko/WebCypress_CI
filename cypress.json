@@ -1,5 +1,5 @@
 {
-  "baseUrl": "https://test.altec-cloud.com",
+  "baseUrl": "https://wa19qa40.altec-wa.com",
   "ignoreTestFiles": [
     "**/2-advanced-examples/*",
     "**/1-getting-started/*",
