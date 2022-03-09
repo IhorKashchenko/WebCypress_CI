@@ -5,6 +5,10 @@ on: [push]
 jobs:
   cypress-run:
     runs-on: self-hosted
+    strategy:
+      matrix:
+        # run 3 copies of the current job in parallel
+        containers: [1, 2, 3]
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -14,17 +18,3 @@ jobs:
         uses: cypress-io/github-action@v2
         with:
           start: npx cypress run --spec 'cypress/integration/API.spec.js'
-
-jobs:
-  cypress-run:
-    runs-on: self-hosted
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      # Install NPM dependencies, cache them correctly
-      # and run all Cypress tests
-      - name: Cypress run
-        uses: cypress-io/github-action@v2
-        with:
-          start: npx cypress run --spec 'cypress/integration/mobile-smoke.spec.js'
-
