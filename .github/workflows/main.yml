@@ -15,5 +15,6 @@ jobs:
         with:
           start: npm install
       - name: Cypress run
+        uses: cypress-io/github-action@v2
         with:
           start: npm run cy:run_browser_ff
