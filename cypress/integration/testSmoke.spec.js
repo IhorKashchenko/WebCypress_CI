@@ -420,8 +420,8 @@ describe('Smoke Test', () => {
         onLoginPage.logout()
         
     })
-// Activate after bug fix
-    it.skip('verifying that smart form is not selected after user log back in', () => {
+
+    it('verifying that smart form is not selected after user log back in', () => {
       cy.navigateToSearchByID()
       cy.get('[id="searchByIdForm"]').find('input').type(37637)
       cy.get('[type="submit"]').click()
