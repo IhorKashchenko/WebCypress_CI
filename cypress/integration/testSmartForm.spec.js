@@ -20,7 +20,7 @@ describe('Create SF from Template', () => {
         navigateTo.batchIndexPage()
         onBatchIndexPage.openTiffFolder()
         onBatchIndexPage.sendToWorkflowEnableClick()
-        cy.workflowDocTypeSelect('AP Accumatica')
+        cy.workflowDocTypeSelect('AP Acumatica')
         onBatchIndexPage.saveButtonClick()
         onBatchIndexPage.searchNewCreatedDoc()
         cy.openFirstDocument()
@@ -37,7 +37,7 @@ describe('Create SF from Template', () => {
         onLoginPage.logout()
     })
 
-    it.skip('creating Sage300', () => {
+    it('creating Sage300', () => {
 
         navigateTo.batchIndexPage()
         onBatchIndexPage.openTiffFolder()
