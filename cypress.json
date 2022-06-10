@@ -7,10 +7,10 @@
   ],
   "viewportHeight": 1080,
   "viewportWidth": 1920,
-  "defaultCommandTimeout": 30000,
+  "defaultCommandTimeout": 15000,
   "retries": {
-    "runMode": 1,
-    "openMode": 0
+    "runMode": 2,
+    "openMode": 1
   },
   "projectId": "18n3zg"
 }

@@ -2,8 +2,8 @@
 
 import { onLoginPage }  from "../support/page_objects/loginPage"
 
-const urls = ['https://wa19qa40.altec-wa.com/DoclinkWeb/#/login',
-              'https://test.altec-cloud.com/DocLinkWeb/#/login']
+const urls = ['https://wa19qa40.altec-wa.com//DoclinkWeb/#/advancedSearch/0',
+              'https://test.altec-cloud.com//DoclinkWeb/#/advancedSearch/0']
 
 
 describe('External User', () => {

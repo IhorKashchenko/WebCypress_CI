@@ -47,11 +47,11 @@ import '@testing-library/cypress/add-commands';
  */
 
 Cypress.Commands.add('openLoginPage', () => {
-    cy.visit('/DoclinkWeb/#/login')
+    cy.visit('/DoclinkWeb/#/advancedSearch/0')
 })
 
 Cypress.Commands.add('openCloudLoginPage', () => {
-    cy.visit('https://test.altec-cloud.com/DocLinkWeb/#/login')
+    cy.visit('https://test.altec-cloud.com/DocLinkWeb/#/advancedSearch/0')
 })
 
 // Assertion
