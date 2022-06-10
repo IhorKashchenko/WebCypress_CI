@@ -44,7 +44,9 @@ describe('Smoke Test', () => {
       if(Cypress.browser.name === 'edge'){
         onLoginPage.login('ik3', '1234')
       }
-    })
+      cy.intercept('GET', '**/api/Property/MasterProperties**').as('fullLoad')
+      cy.wait('@fullLoad')
+    });
 
     it('verify navigation across the pages', () => {
         navigateTo.quickSearchPage()
@@ -81,7 +83,6 @@ describe('Smoke Test', () => {
         cy.addButtonClick()
         cy.addingPropertyValue('Currency', 'usd')
         cy.addingPropertyValue('PO Amount', '165.25')
-        cy.addingPropertyValue('User Name', 'Ihor')
         cy.createButtonClick()
         cy.get('[id="toast-container"]').should('be.visible') //Document Created message
         cy.contains('Open New Document').should('be.visible')
@@ -179,14 +180,18 @@ describe('Smoke Test', () => {
 
     it('LanguageChangeToBritish', () => {
         cy.menuBtnClick()
-        cy.MySettingsBtnClick()
-        cy.contains('(British)').click()
-        cy.contains('Save').click()
+        cy.MySettingsBtnClick().then(() => {
+          cy.get('#system-settings').within(() => {
+            cy.contains('(British)').click()
+            cy.contains('Save').click()
+          })
+        })
         cy.menuBtnClick()
         cy.get('.mat-menu-content').should('contain' , 'My Settings')
         cy.MySettingsBtnClick()
-        cy.EnglishLanguageSelect()
-        cy.contains(' Save ').click()
+        cy.EnglishLanguageSelect().then(() => {
+          cy.contains(' Save ').click()
+        })
         onLoginPage.logout()
     })
 
@@ -258,7 +263,6 @@ describe('Smoke Test', () => {
         .should('contain', 'General')
         .and('contain', 'Notes')
         onLoginPage.logout()
-
     })
 
     it('Check Invert Colors', () => {
@@ -384,11 +388,14 @@ describe('Smoke Test', () => {
 
     it('Display Field check', () => {
         cy.menuBtnClick()
-        cy.MySettingsBtnClick()
-        cy.contains('Search Results').click()
-        cy.get('[type="checkbox"]').check({force:true})
-          .should('be.checked')
-        cy.contains('Save').click()
+        cy.MySettingsBtnClick().then(() => {
+          cy.get('#system-settings').within(() => {
+            cy.contains('Search Results').click()
+            cy.get('[type="checkbox"]').check({force:true})
+            .should('be.checked')
+            cy.contains('Save').click()
+          })
+        })
         cy.navigateToSearchByID()
         cy.get('[id="searchByIdForm"]').find('input').type(31036)
         cy.get('[type="submit"]').click()

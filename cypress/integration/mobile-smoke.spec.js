@@ -2,8 +2,8 @@
 import { onLoginPage }  from "../support/page_objects/loginPage"
 
 const devices = ['iphone-x', 'samsung-note9', 'iphone-6']
-const urls = ['https://wa19qa40.altec-wa.com/DoclinkWeb/#/login',
-              'https://test.altec-cloud.com/DocLinkWeb/#/login']
+const urls = ['https://wa19qa40.altec-wa.com/DoclinkWeb/#/advancedSearch/0',
+              'https://test.altec-cloud.com/DocLinkWeb/#/advancedSearch/0']
 const ipads = 'ipad-mini'
 
 describe('SMOKE mobile', () => {
@@ -26,9 +26,9 @@ describe('SMOKE mobile', () => {
         it('check menu items '+ device + ' ' + url, () => {
           cy.viewport(device)
           loginOpt()
-          cy.contains('Quick Search').find('.fa-caret-down').click()
-          cy.get('.mat-menu-content').should('contain', 'Quick Search')
-            .and('contain', 'Advanced Search')
+          cy.contains('Advanced Search').find('.fa-caret-down').click()
+          cy.get('.mat-menu-content').should('contain', 'Advanced Search')
+            .and('contain', 'Quick Search')
             .and('contain', 'Full Text Search')
             .and('contain', 'View Documents by ID')
             .and('contain', 'Search')
@@ -50,14 +50,14 @@ describe('SMOKE mobile', () => {
         it('navigate cross different pages '+ device + ' ' + url, () => {
           cy.viewport(device)
           loginOpt()
-          cy.contains('Quick Search').find('.fa-caret-down').click()
-          cy.get('.mat-menu-content').contains('Advanced Search').click().wait(500)
+          cy.contains('Advanced Search').find('.fa-caret-down').click()
+          cy.get('.mat-menu-content').contains('Quick Search').click().wait(500)
           cy.get('.nav-item').should('contain', 'Advanced Search')
-          cy.get('[id="advancedSearch-detail-content"]')
+          cy.get('[id="quicksearch-detail-content"]')
             .should('contain', 'companies')
             .and('contain', 'document types')
             .and('contain', 'properties')
-          cy.contains('Advanced Search').find('.fa-caret-down').click()
+          cy.contains('Quick Search').find('.fa-caret-down').click()
           cy.get('.mat-menu-content').contains('Full Text Search').click().wait(500)
           cy.get('.nav-item').should('contain', 'Full Text Search')
           cy.get('[id="searchOptions"]').should('be.visible')
@@ -139,7 +139,7 @@ describe('SMOKE mobile', () => {
       it('check menu items  ' + ipads +' '+ url, () => {
         cy.viewport(ipads)
         loginOpt()
-        cy.contains('Quick Search').find('.fa-caret-down').click()
+        cy.contains('Advanced Search').find('.fa-caret-down').click()
         cy.get('.mat-menu-content').should('contain', 'Quick Search')
           .and('contain', 'Advanced Search')
           .and('contain', 'Full Text Search')
@@ -163,7 +163,7 @@ describe('SMOKE mobile', () => {
       it('navigate cross different pages ' + ipads +' '+ url, () => {
         cy.viewport(ipads)
         loginOpt()
-        cy.contains('Quick Search').find('.fa-caret-down').click()
+        cy.contains('Advanced Search').find('.fa-caret-down').click()
         cy.get('.mat-menu-content').contains('Advanced Search').click().wait(500)
         cy.get('.nav-item').should('contain', 'Advanced Search')
         cy.get('[id="sidebar-header"]')
