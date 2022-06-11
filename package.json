@@ -15,7 +15,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "cy:run_spec_loc": "npx cypress run --spec 'cypress/integration/*.spec.js' --headed",
     "cy:run_par": "npm run cy:run_spec_loc -- --browser chrome & npm run cy:run_spec_loc -- --browser firefox & npm run cy:run_spec_loc -- --browser edge",
-    "cy:run_spec": "npx cypress run --spec 'cypress/integration/*.spec.js' --record --key 5adbca6e-06eb-4f71-a410-fe391f02e416",
+    "cy:run_spec": "npx cypress run --spec 'cypress/integration/external-user.spec.js' --record --key 5adbca6e-06eb-4f71-a410-fe391f02e416",
     "cy:run_browser": "npm run cy:run_spec -- --browser chrome & npm run cy:run_spec -- --browser firefox & npm run cy:run_spec -- --browser edge",
     "report": "jrm ./results/combined-repotr.xml \"./results/result-*.xml\"",
     "cy:run_browser_ff": "npm run cy:run_spec -- --browser firefox && npm run report || npm run report",
