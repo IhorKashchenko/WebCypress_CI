@@ -1,5 +1,9 @@
 {
   "baseUrl": "https://wa19qa40.altec-wa.com",
+  "reporter": "junit",
+  "reporterOptions": {
+    "mochaFile": "results/result-[hash].xml"
+  },
   "ignoreTestFiles": [
     "**/2-advanced-examples/*",
     "**/1-getting-started/*",
