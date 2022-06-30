@@ -475,6 +475,28 @@ describe('Smoke Test', () => {
       onLoginPage.logout()
     })
 
+    it('User is able to sent an email', () => {
+      cy.intercept('POST', '**/DocLinkWebService/api/DocumentImage/Email').as('Email')
+
+      cy.navigateToSearchByID()
+      cy.get('[id="searchByIdForm"]').find('input').type(37637)
+      cy.get('[type="submit"]').click()
+      cy.openFirstDocument()
+      cy.get('#imageviewer-email').click()
+      cy.get('.responsive-toolbar').should('not.be.visible')
+      cy.get('[aria-labelledby=emailDocumentDialog]').within(() => {
+        cy.get('[name="To"]').type('test@mail.com')
+        cy.get('[name="Subject"]').type('test email')
+        cy.get('[name="Body"]').type('test email body')
+        cy.get('button').contains('Send').click()
+      })
+      cy.wait('@Email').then(() => {
+        cy.get('[aria-labelledby=emailDocumentDialog]').should('not.exist')
+        cy.get('.responsive-toolbar').should('be.visible')
+      })
+      onLoginPage.logout()
+    })
+
 // Need finish this test
     it.skip('check same doc type', () => {
       let name = []
